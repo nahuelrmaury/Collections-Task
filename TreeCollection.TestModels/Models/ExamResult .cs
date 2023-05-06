@@ -2,7 +2,7 @@
 
 namespace TreeCollection.TestModels.Models
 {
-    public class ExamResult
+    public class ExamResult : IComparable<ExamResult>
     {
         public int Id { get; set; }
         public string Name { get; set; }
