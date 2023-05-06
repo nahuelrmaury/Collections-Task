@@ -4,10 +4,12 @@ namespace TreeCollection
 {
     public class Tree<T> : IEnumerable<T> 
     {
+        private Node<T> _root = new Node<T>();
+        private AddValueToNode<T> _addValue = new AddValueToNode<T>();
+        private bool _isReversedReading;
 
-        public Tree(bool isReversed = false) 
+        public Tree() 
         {
-            throw new NotImplementedException();
         }
 
         public void Add(T newElement)
