@@ -36,7 +36,7 @@ namespace TreeCollection
             }
             else if (newElement.CompareTo(root.GetNewElement()) == 0)
             {
-                throw new ArgumentException("Values are equal");
+                throw new Exception();
             }
             else if (newElement.CompareTo(root.GetNewElement()) > 0)
             {
@@ -59,14 +59,49 @@ namespace TreeCollection
             return _addValueToNode.counter;
         }
 
+        private void NormalOrder(Node<T> root)
+        {
+            if (root.Left != null)
+                NormalOrder(root.Left);
+
+            _addValueToNode.AddValue(root.GetNewElement());
+
+            if (root.Right != null)
+                NormalOrder(root.Right);
+        }
+
+        private void ReverseOrder(Node<T> root)
+        {
+            if (root.Right != null)
+                ReverseOrder(root.Right);
+
+            _addValueToNode.AddValue(root.GetNewElement());
+
+            if (root.Left != null)
+                ReverseOrder(root.Left);
+        }
+
+        public EnumerableList<T> Traverse()
+        {
+            _addValueToNode.SetSize();
+
+            if (_isReversedReading)
+                ReverseOrder(_root);
+            else
+                NormalOrder(_root);
+
+            EnumerableList<T> values = new EnumerableList<T>(_addValueToNode.GetValue());
+            return values;
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return ((IEnumerable<T>)Traverse()).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return Traverse().GetEnumerator();
         }
     }
 }
