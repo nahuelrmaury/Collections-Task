@@ -19,11 +19,12 @@ namespace TreeCollection
 
         public void Add(T newElement)
         {
-            if (!IsDefault(newElement))
+            //if (!IsDefault(newElement)) 
                 AddNode(_root, newElement);
         }
 
-        private static bool IsDefault(T t) { return EqualityComparer<T>.Default.Equals(t, default); }
+        /* if return false, indicate that the new element is not equal to the default value of its type */
+        private static bool IsDefault(T t) => t is null || EqualityComparer<T>.Default.Equals(t, default);
 
         private void AddNode(Node<T> root, T newElement)
         {
